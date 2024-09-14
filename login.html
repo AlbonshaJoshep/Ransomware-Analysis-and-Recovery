@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login, Register, and Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background-image:"./images.jpeg";
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            background-color: rgba(51, 51, 51, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(43, 42, 42, 0.5);
+            width: 300px;
+            text-align: center;
+        }
+        .container h2 {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="password"], input[type="email"], input[type="submit"] {
+            display: block;
+            width: calc(100% - 20px);
+            margin: 10px auto;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #ef1f14;
+            color: #333;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .link {
+            color: #ef1f14;
+            cursor: pointer;
+            display: block;
+            margin-top: 20px;
+            text-decoration: underline;
+        }
+        .link:hover {
+            color: #FFF;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Container -->
+    <div id="login-container" class="container">
+        <h2>Login</h2>
+        <form action="{{ url_for('handle_login') }}" method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+        </form>
+        <span class="link" id="toRegister">Don't have an account? Register</span>
+    </div>
+
+    <!-- Register Container -->
+    <div id="register-container" class="container" style="display:none;">
+        <h2>Register</h2>
+        <form action="{{ url_for('handle_register') }}" method="POST">
+            <input type="text" name="fullname" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Register">
+        </form>
+        <span class="link" id="toLogin">Already have an account? Login</span>
+    </div>
+
+    <script>
+        const loginContainer = document.getElementById('login-container');
+        const registerContainer = document.getElementById('register-container');
+        const toRegister = document.getElementById('toRegister');
+        const toLogin = document.getElementById('toLogin');
+
+        toRegister.addEventListener('click', () => {
+            loginContainer.style.display = 'none';
+            registerContainer.style.display = 'block';
+        });
+
+        toLogin.addEventListener('click', () => {
+            registerContainer.style.display = 'none';
+            loginContainer.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
